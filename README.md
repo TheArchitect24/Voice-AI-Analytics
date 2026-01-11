@@ -1,4 +1,4 @@
-# 🎙️ Voice AI Analytics – Take-Home Assignment
+# 🎙️ Voice AI Analytics
 
 **Role:** Analytics Engineer
 **Stack:** Docker · PostgreSQL · dbt · Python · Metabase · VS Code
