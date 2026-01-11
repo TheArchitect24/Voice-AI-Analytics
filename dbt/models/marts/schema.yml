@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: fact_voice_ai_sessions
+    description: >
+      Session-level fact table aggregating Voice AI performance metrics.
+      One row per session_id. Used as the certified source for reporting
+      and dashboards in Metabase.
+
+    columns:
+      - name: session_id
+        description: Unique identifier for a Voice AI session
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_voice_sessions')
+                field: session_id
+
+      - name: user_id
+        description: User identifier associated with the session
+        tests:
+          - not_null
+
+      - name: channel
+        description: Channel used for the session (voice, web, etc.)
+        tests:
+          - not_null
+
+      - name: final_outcome
+        description: Final outcome of the session (completed, transferred, abandoned)
+        tests:
+          - not_null
+
+      - name: total_turns
+        description: Total number of conversational turns in the session
+        tests:
+          - not_null
+
+      - name: avg_asr_confidence
+        description: Average ASR confidence score across the session
+        tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: avg_intent_confidence
+        description: Average intent confidence score across the session
+        tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: misunderstanding_rate
+        description: Count of turns where the system misunderstood user intent
+        tests:
+          - not_null
+
+      - name: silence_rate
+        description: Count of turns where silence was detected
+        tests:
+          - not_null
+
+      - name: ratio_misunderstanding_turns
+        description: Proportion of turns with misunderstanding errors
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: ratio_silence_turns
+        description: Proportion of turns with silence errors
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: ratio_noise_turns
+        description: Proportion of turns with silence errors
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+
+      - name: ratio_no_error_type_turns
+        description: Proportion of turns with no recorded error
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+

@@ -1,0 +1,10 @@
+name: "irembo"
+version: "1.0"
+profile: "irembo"
+
+models:
+  irembo:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

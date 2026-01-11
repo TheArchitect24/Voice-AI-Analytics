@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: irembo_postgres
+    environment:
+      POSTGRES_DB: irembo
+      POSTGRES_USER: analyst
+      POSTGRES_PASSWORD: analyst
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  analytics:
+    build: .
+    container_name: irembo_analytics
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    depends_on:
+      - postgres
+    command: sleep infinity
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: irembo_metabase
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: irembo
+      MB_DB_PORT: 5432
+      MB_DB_USER: analyst
+      MB_DB_PASS: analyst
+      MB_DB_HOST: postgres
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

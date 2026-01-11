@@ -1,0 +1,11 @@
+# Core analytics
+pandas
+sqlalchemy
+psycopg[binary]
+jupyter
+matplotlib
+seaborn
+scikit-learn
+
+# dbt
+dbt-postgres

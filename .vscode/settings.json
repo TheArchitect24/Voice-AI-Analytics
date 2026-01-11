@@ -1,0 +1,26 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "postgres",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "irembo_postgres",
+            "database": "irembo",
+            "username": "analyst",
+            "password": "analyst"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "username": "analyst",
+            "database": "irembo",
+            "name": "irembo_local",
+            "password": "analyst"
+        }
+    ]
+}
