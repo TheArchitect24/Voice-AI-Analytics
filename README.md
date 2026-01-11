@@ -163,16 +163,21 @@ Connect Metabase to:
 ├── docker-compose.yml
 ├── Dockerfile
 ├── requirements.txt
+├── data/
+|     └── raw/
+|          └── all.csv
+├── scripts/
+|       └── load_csvs.py
 ├── dbt/
 │   ├── dbt_project.yml
 │   ├── packages.yml
 │   ├── models/
-│   │   └── irembo/
-│   │       ├── staging/
-│   │       └── marts/
+│   │   ├── staging/
+│   │   └── marts/ 
 │   └── tests/
+|        └── tests.sql
 ├── notebooks/
-│   └── analysis.ipynb
+│   └── 01_friction_analysis.ipynb
 └── README.md
 ```
 
